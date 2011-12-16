@@ -1,0 +1,59 @@
+﻿<Window x:Class="EjemploDTEFacil.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cliente .Net DTE Fácil" Width="520" Height="820" SizeToContent="Manual" ResizeMode="CanResizeWithGrip" Icon="/EjemploDTEFacil;component/Images/icono.png">
+    <DockPanel Name="mainPanel" LastChildFill="True">
+        <ToolBarTray Height="40" Name="toolBarTray" DockPanel.Dock="Top">
+            <ToolBar Height="38" Name="userToolBar">
+                <Button Name="sessionButton" Click="sessionButton_Click">
+                    <Image Source="/EjemploDTEFacil;component/Images/login.png" />
+                </Button>
+            </ToolBar>
+            <ToolBar Height="38" Name="documentsToolBar">
+                <Button Name="documentsButton" Click="documentsButton_Click">
+                    <Image Source="/EjemploDTEFacil;component/Images/download.png" />
+                </Button>
+                <Button Name="searchButton" Click="searchButton_Click">
+                    <Image Source="/EjemploDTEFacil;component/Images/buscar.png" />
+                </Button>
+                <Button Name="createButton" Click="createButton_Click">
+                    <Image Source="/EjemploDTEFacil;component/Images/crear.png" />
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <StatusBar Height="26" Name="statusBar" DockPanel.Dock="Bottom">
+            <StatusBarItem>
+                <Label Name="username" Height="23" FontSize="10" />
+            </StatusBarItem>
+        </StatusBar>
+        <StackPanel Name="centralPanel" >
+            <DataGrid Name="dataGrid" HorizontalContentAlignment="Stretch" AlternatingRowBackground="#FFCAE8A2" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Tipo" Binding="{Binding Path=Tipo}" />
+                    <DataGridTextColumn Header="Folio" Binding="{Binding Path=Folio}" />
+                    <DataGridTextColumn Header="RUT Emisor" Binding="{Binding Path=RutEmisor}" />
+                    <DataGridTextColumn Header="RUT Receptor" Binding="{Binding Path=RutRecep}" />
+                    <DataGridTextColumn Header="Monto Total" Binding="{Binding Path=MntTotal}" />
+                    <DataGridTextColumn Header="Fecha Emisión" Binding="{Binding Path=FchEmis, StringFormat={}\{0:dd/MM/yyyy\}}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Click="detallesButton_Click">
+                                    <Image Source="/EjemploDTEFacil;component/Images/pdf.png" Height="14" Width="14" ToolTip="Ver PDF"/>
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Name="pageNavigationPanel" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Name="ant" Content="Anterior" Margin="3" IsEnabled="False" Click="ant_Click" />
+                <TextBox Name="actual" MinWidth="1" Margin="3" Text="-" IsEnabled="False"/>
+                <Label Name="npags" Margin="3" Content="/-"/>
+                <Button Name="ir" Content="Ir" Margin="3" IsEnabled="False" Click="ir_Click" />
+                <Button Name="sig" Content="Siguiente" Margin="3" IsEnabled="False" Click="sig_Click" />
+                <Label Name="total" Margin="3" Content="- elemento(s) encontrado(s)"/>
+            </StackPanel>
+        </StackPanel>
+    </DockPanel>
+</Window>

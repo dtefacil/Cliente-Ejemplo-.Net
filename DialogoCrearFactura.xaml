@@ -1,0 +1,73 @@
+﻿<Window x:Class="EjemploDTEFacil.DialogoCrearFactura"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:proj="clr-namespace:EjemploDTEFacil"
+        Title="Crear Factura" Height="520" Width="430" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+    <Window.Resources>
+        <proj:ComboBoxItemToCodeConverter x:Key="cbitcConverter" />
+    </Window.Resources>
+    <StackPanel Name="mainPanel">
+        <GroupBox Header="Sus Datos" Name="susDatos" Margin="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Margin="3" Grid.Column="0" Grid.Row="0" Content="Actividad económica:" Height="28" HorizontalAlignment="Right" Name="actEcoLabel" VerticalAlignment="Center" />
+                <ComboBox Margin="3" Grid.Column="1" Grid.Row="0" Height="23" HorizontalAlignment="Left" Name="actEcoComboBox" VerticalAlignment="Center" Width="200" SelectedValue="{Binding Path=ActividadEconomica, Mode=OneWayToSource, Converter={StaticResource ResourceKey=cbitcConverter}}" />
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Receptor" Name="receptor" Margin="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Margin="3" Grid.Column="0" Grid.Row="0" Content="RUT:" Height="28" HorizontalAlignment="Right" Name="rutLabel" VerticalAlignment="Center" />
+                <TextBox Grid.Row="0" Grid.Column="1" Height="23" HorizontalAlignment="Left" Name="rut" VerticalAlignment="Center" Width="90" ToolTip="Sin puntos, con guion" Text="{Binding Path=Receptor.Rut, Mode=OneWayToSource}" />
+                
+                <Label Margin="3" Grid.Column="0" Grid.Row="1" Content="Razón Social:" Height="28" HorizontalAlignment="Right" Name="razonSocialLabel" VerticalAlignment="Center" />
+                <TextBox Grid.Row="1" Grid.Column="1" Height="23" HorizontalAlignment="Left" Name="razonSocial" VerticalAlignment="Center" Width="200" Text="{Binding Path=Receptor.RazonSocial, Mode=OneWayToSource}"/>
+
+                <Label Margin="3" Grid.Column="0" Grid.Row="2" Content="Giro:" Height="28" HorizontalAlignment="Right" Name="giroLabel" VerticalAlignment="Center" />
+                <TextBox Grid.Row="2" Grid.Column="1" Height="23" HorizontalAlignment="Left" Name="giro" VerticalAlignment="Center" Width="200" Text="{Binding Path=Receptor.Giro, Mode=OneWayToSource}"/>
+
+                <Label Margin="3" Grid.Column="0" Grid.Row="3" Content="Dirección:" Height="28" HorizontalAlignment="Right" Name="direccionLabel" VerticalAlignment="Center" />
+                <TextBox Grid.Row="3" Grid.Column="1" Height="23" HorizontalAlignment="Left" Name="direccion" VerticalAlignment="Center" Width="200" Text="{Binding Path=Receptor.Ubicacion.Direccion, Mode=OneWayToSource}"/>
+
+                <Label Margin="3" Grid.Column="0" Grid.Row="4" Content="Comuna:" Height="28" HorizontalAlignment="Right" Name="comunaLabel" VerticalAlignment="Center" />
+                <TextBox Grid.Row="4" Grid.Column="1" Height="23" HorizontalAlignment="Left" Name="comuna" VerticalAlignment="Center" Width="100" Text="{Binding Path=Receptor.Ubicacion.Comuna, Mode=OneWayToSource}"/>
+
+                <Label Margin="3" Grid.Column="0" Grid.Row="5" Content="Ciudad:" Height="28" HorizontalAlignment="Right" Name="ciudadLabel" VerticalAlignment="Center" />
+                <TextBox Grid.Row="5" Grid.Column="1" Height="23" HorizontalAlignment="Left" Name="ciudad" VerticalAlignment="Center" Width="100" Text="{Binding Path=Receptor.Ubicacion.Ciudad, Mode=OneWayToSource}"/>
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Detalles" Name="detallesGB" Margin="3" Height="150">
+            <DockPanel LastChildFill="True">
+                <DataGrid Name="detallesGrid" ItemsSource="{Binding Detalles}"  AlternatingRowBackground="#FFCAE8A2" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserAddRows="True" VerticalScrollBarVisibility="Visible">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Nombre" Binding="{Binding Nombre}"/>
+                        <DataGridTextColumn Header="Descripción" Binding="{Binding Descripcion}"/>
+                        <DataGridTextColumn Header="Unidad" Binding="{Binding Unidad}"/>
+                        <DataGridTextColumn Header="Cantidad" Binding="{Binding Cantidad}"/>
+                        <DataGridTextColumn Header="Precio Unitario" Binding="{Binding PrecioUnitario}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </GroupBox>
+        <StackPanel Name="stackPanel1">
+            <Button Content="Ok" Width="80" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="3" Click="Button_Click" />
+        </StackPanel>
+    </StackPanel>
+</Window>
